@@ -1,0 +1,298 @@
+from enum import Enum
+
+
+class UserRole(str, Enum):
+    USER = "USER"
+    ORGANIZATION = "ORGANIZATION"
+    ADMIN = "ADMIN"
+
+
+class ChallengeType(str, Enum):
+    SOLO = "SOLO"
+    COMMUNITY = "COMMUNITY"
+
+
+class ChallengeDifficulty(str, Enum):
+    EASY = "EASY"
+    MEDIUM = "MEDIUM"
+    HARD = "HARD"
+
+
+class ChallengeStatus(str, Enum):
+    DRAFT = "DRAFT"
+    AI_GENERATED = "AI_GENERATED"
+    APPROVED = "APPROVED"
+    PUBLISHED = "PUBLISHED"
+    COMPLETED = "COMPLETED"
+
+
+class ChallengeCategory(str, Enum):
+    TREE_PLANTATION = "TREE_PLANTATION"
+    RECYCLING = "RECYCLING"
+    WATER_CONSERVATION = "WATER_CONSERVATION"
+    ENERGY_SAVING = "ENERGY_SAVING"
+    CLEANUP_DRIVE = "CLEANUP_DRIVE"
+    SUSTAINABLE_TRANSPORT = "SUSTAINABLE_TRANSPORT"
+    COMMUNITY_SERVICE = "COMMUNITY_SERVICE"
+
+
+class SubmissionType(str, Enum):
+    TREE_PLANTATION = "TREE_PLANTATION"
+    RECYCLING = "RECYCLING"
+    WASTE_CLEANUP = "WASTE_CLEANUP"
+    WATER_CONSERVATION = "WATER_CONSERVATION"
+    ENERGY_SAVING = "ENERGY_SAVING"
+    SUSTAINABLE_TRANSPORT = "SUSTAINABLE_TRANSPORT"
+    PLANT_HEALTH_CHECK = "PLANT_HEALTH_CHECK"
+    COMMUNITY_SERVICE = "COMMUNITY_SERVICE"
+    OTHER = "OTHER"
+
+
+class SubmissionStatus(str, Enum):
+    PENDING = "PENDING"
+    AI_REVIEWING = "AI_REVIEWING"
+    AI_VERIFIED = "AI_VERIFIED"
+    AI_REJECTED = "AI_REJECTED"
+    MANUAL_REVIEW = "MANUAL_REVIEW"
+    APPROVED = "APPROVED"
+    REJECTED = "REJECTED"
+
+
+class MediaType(str, Enum):
+    IMAGE = "IMAGE"
+    VIDEO = "VIDEO"
+    DOCUMENT = "DOCUMENT"
+    OTHER = "OTHER"
+
+
+class AIVerificationStatus(str, Enum):
+    QUEUED = "QUEUED"
+    RUNNING = "RUNNING"
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
+
+
+class AIVerificationDecision(str, Enum):
+    VERIFIED = "VERIFIED"
+    REJECTED = "REJECTED"
+    MANUAL_REVIEW = "MANUAL_REVIEW"
+
+
+class FraudCheckType(str, Enum):
+    FILE_INTEGRITY = "FILE_INTEGRITY"
+    DUPLICATE_IMAGE = "DUPLICATE_IMAGE"
+    SCREENSHOT_DETECTION = "SCREENSHOT_DETECTION"
+    IMAGE_QUALITY = "IMAGE_QUALITY"
+    GPS_VALIDATION = "GPS_VALIDATION"
+    CONTENT_RELEVANCE = "CONTENT_RELEVANCE"
+
+
+class FraudCheckResult(str, Enum):
+    PASS = "PASS"
+    WARNING = "WARNING"
+    FAIL = "FAIL"
+    NOT_APPLICABLE = "NOT_APPLICABLE"
+
+
+class PlantDiagnosisStatus(str, Enum):
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
+    MANUAL_REVIEW = "MANUAL_REVIEW"
+
+
+class PlantDiseaseSeverity(str, Enum):
+    HEALTHY = "HEALTHY"
+    LOW = "LOW"
+    MODERATE = "MODERATE"
+    HIGH = "HIGH"
+    CRITICAL = "CRITICAL"
+
+
+class PlantRecommendationType(str, Enum):
+    CURE = "CURE"
+    PREVENTION = "PREVENTION"
+    CARE = "CARE"
+    FOLLOW_UP = "FOLLOW_UP"
+
+
+class ImpactMetricType(str, Enum):
+    TREE_PLANTATION = "TREE_PLANTATION"
+    WASTE_DIVERSION = "WASTE_DIVERSION"
+    WATER_SAVED = "WATER_SAVED"
+    ENERGY_SAVED = "ENERGY_SAVED"
+    TRANSPORT_EMISSION_SAVED = "TRANSPORT_EMISSION_SAVED"
+    PLANT_HEALTH = "PLANT_HEALTH"
+    MIXED = "MIXED"
+
+
+class ImpactCalculationStatus(str, Enum):
+    ESTIMATED = "ESTIMATED"
+    CONFIRMED = "CONFIRMED"
+    NEEDS_REVIEW = "NEEDS_REVIEW"
+    FAILED = "FAILED"
+    
+class PointsTransactionType(str, Enum):
+    EARNED = "EARNED"
+    BONUS = "BONUS"
+    PENALTY = "PENALTY"
+    ADJUSTMENT = "ADJUSTMENT"
+
+
+class PointsSourceType(str, Enum):
+    SUBMISSION = "SUBMISSION"
+    AI_VERIFICATION = "AI_VERIFICATION"
+    ADMIN_APPROVAL = "ADMIN_APPROVAL"
+    BADGE_BONUS = "BADGE_BONUS"
+    SYSTEM = "SYSTEM"
+
+
+class BadgeCategory(str, Enum):
+    STARTER = "STARTER"
+    TREE_PLANTATION = "TREE_PLANTATION"
+    RECYCLING = "RECYCLING"
+    CLEANUP = "CLEANUP"
+    WATER = "WATER"
+    ENERGY = "ENERGY"
+    TRANSPORT = "TRANSPORT"
+    PLANT_HEALTH = "PLANT_HEALTH"
+    IMPACT = "IMPACT"
+    COMMUNITY = "COMMUNITY"
+
+
+class LeaderboardPeriod(str, Enum):
+    ALL_TIME = "ALL_TIME"
+    MONTHLY = "MONTHLY"
+    WEEKLY = "WEEKLY"
+    
+class CommunityPostVisibility(str, Enum):
+    PUBLIC = "PUBLIC"
+    CHALLENGE_ONLY = "CHALLENGE_ONLY"
+    PRIVATE = "PRIVATE"
+
+
+class CommunityPostStatus(str, Enum):
+    ACTIVE = "ACTIVE"
+    HIDDEN = "HIDDEN"
+    DELETED = "DELETED"
+
+
+class CommunityPostType(str, Enum):
+    GENERAL = "GENERAL"
+    SUBMISSION_SHARE = "SUBMISSION_SHARE"
+    CHALLENGE_UPDATE = "CHALLENGE_UPDATE"
+    ACHIEVEMENT_SHARE = "ACHIEVEMENT_SHARE"
+
+
+class CommunityCommentStatus(str, Enum):
+    ACTIVE = "ACTIVE"
+    HIDDEN = "HIDDEN"
+    DELETED = "DELETED"
+
+
+class CommunityReportReason(str, Enum):
+    SPAM = "SPAM"
+    INAPPROPRIATE = "INAPPROPRIATE"
+    HARASSMENT = "HARASSMENT"
+    MISINFORMATION = "MISINFORMATION"
+    OTHER = "OTHER"
+
+
+class CommunityReportStatus(str, Enum):
+    PENDING = "PENDING"
+    REVIEWED = "REVIEWED"
+    DISMISSED = "DISMISSED"
+    ACTION_TAKEN = "ACTION_TAKEN"
+    
+class OrganizationType(str, Enum):
+    NGO = "NGO"
+    CORPORATE = "CORPORATE"
+    COLLEGE = "COLLEGE"
+    SCHOOL = "SCHOOL"
+    GOVERNMENT = "GOVERNMENT"
+    COMMUNITY_GROUP = "COMMUNITY_GROUP"
+    OTHER = "OTHER"
+
+
+class OrganizationProfileStatus(str, Enum):
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
+    VERIFICATION_PENDING = "VERIFICATION_PENDING"
+    SUSPENDED = "SUSPENDED"
+
+
+class CampaignStatus(str, Enum):
+    DRAFT = "DRAFT"
+    ACTIVE = "ACTIVE"
+    PAUSED = "PAUSED"
+    COMPLETED = "COMPLETED"
+    CANCELLED = "CANCELLED"
+
+
+class CampaignMemberRole(str, Enum):
+    OWNER = "OWNER"
+    MANAGER = "MANAGER"
+    PARTICIPANT = "PARTICIPANT"
+    VOLUNTEER = "VOLUNTEER"
+
+
+class CampaignMemberStatus(str, Enum):
+    ACTIVE = "ACTIVE"
+    REMOVED = "REMOVED"
+
+
+class CampaignChallengeStatus(str, Enum):
+    ACTIVE = "ACTIVE"
+    REMOVED = "REMOVED"
+    
+class NotificationType(str, Enum):
+    GENERAL = "GENERAL"
+    SYSTEM = "SYSTEM"
+    SUBMISSION_STATUS = "SUBMISSION_STATUS"
+    AI_VERIFICATION = "AI_VERIFICATION"
+    IMPACT_CALCULATED = "IMPACT_CALCULATED"
+    POINTS_AWARDED = "POINTS_AWARDED"
+    BADGE_EARNED = "BADGE_EARNED"
+    CAMPAIGN_UPDATE = "CAMPAIGN_UPDATE"
+    COMMUNITY_INTERACTION = "COMMUNITY_INTERACTION"
+
+
+class NotificationStatus(str, Enum):
+    UNREAD = "UNREAD"
+    READ = "READ"
+    ARCHIVED = "ARCHIVED"
+
+
+class NotificationPriority(str, Enum):
+    LOW = "LOW"
+    NORMAL = "NORMAL"
+    HIGH = "HIGH"
+    URGENT = "URGENT"
+
+
+class NotificationReferenceType(str, Enum):
+    SYSTEM = "SYSTEM"
+    USER = "USER"
+    SUBMISSION = "SUBMISSION"
+    CHALLENGE = "CHALLENGE"
+    CAMPAIGN = "CAMPAIGN"
+    COMMUNITY_POST = "COMMUNITY_POST"
+    BADGE = "BADGE"
+    
+class ESGReportType(str, Enum):
+    ORGANIZATION = "ORGANIZATION"
+    CAMPAIGN = "CAMPAIGN"
+
+
+class ESGReportStatus(str, Enum):
+    DRAFT = "DRAFT"
+    GENERATED = "GENERATED"
+    PUBLISHED = "PUBLISHED"
+    ARCHIVED = "ARCHIVED"
+
+
+class ESGMetricCategory(str, Enum):
+    ENVIRONMENTAL = "ENVIRONMENTAL"
+    SOCIAL = "SOCIAL"
+    GOVERNANCE = "GOVERNANCE"
+    ENGAGEMENT = "ENGAGEMENT"
+    VERIFICATION = "VERIFICATION"

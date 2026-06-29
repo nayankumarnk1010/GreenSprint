@@ -1,0 +1,321 @@
+{
+  "healthy": {
+    "severity": "NONE",
+    "description": "The plant appears healthy based on the uploaded leaf image.",
+    "organic_treatment": [
+      "Continue regular watering based on soil moisture.",
+      "Keep the plant in suitable sunlight.",
+      "Remove dead or damaged leaves regularly."
+    ],
+    "chemical_treatment": [
+      "No chemical treatment is required."
+    ],
+    "prevention": [
+      "Inspect leaves weekly.",
+      "Avoid overwatering.",
+      "Keep the growing area clean."
+    ]
+  },
+  "grape_black_rot": {
+    "severity": "HIGH",
+    "description": "Grape black rot is a fungal disease that causes dark circular spots on grape leaves and can later affect fruits.",
+    "organic_treatment": [
+      "Remove and destroy infected leaves and plant debris.",
+      "Prune the plant to improve air circulation.",
+      "Avoid overhead watering because wet leaves help fungal spread.",
+      "Use neem oil only for mild supportive control, not as a complete cure."
+    ],
+    "chemical_treatment": [
+      "Use a grape-safe fungicide recommended for black rot if infection is spreading.",
+      "Follow local agricultural guidance and product label instructions carefully."
+    ],
+    "prevention": [
+      "Keep grape vines well-pruned.",
+      "Remove fallen infected leaves from the soil.",
+      "Avoid water splashing on leaves.",
+      "Inspect leaves regularly during humid or rainy weather."
+    ]
+  },
+  "apple_black_rot": {
+    "severity": "HIGH",
+    "description": "Apple black rot is a fungal disease that can cause leaf spots, fruit rot, and cankers on branches.",
+    "organic_treatment": [
+      "Remove infected leaves, fruits, and dead branches.",
+      "Destroy infected plant waste instead of composting it.",
+      "Improve airflow by proper pruning."
+    ],
+    "chemical_treatment": [
+      "Use an apple-safe fungicide if disease spread is severe.",
+      "Follow agricultural expert advice and product label instructions."
+    ],
+    "prevention": [
+      "Prune dead wood regularly.",
+      "Keep the orchard area clean.",
+      "Avoid leaving infected fruits under the tree.",
+      "Monitor plants during warm and humid conditions."
+    ]
+  },
+  "black_rot": {
+    "severity": "HIGH",
+    "description": "Black rot is a serious plant disease that can damage leaves, stems, or fruits depending on the crop.",
+    "organic_treatment": [
+      "Remove infected leaves or plant parts.",
+      "Destroy infected crop remains safely.",
+      "Avoid spreading water from infected plants to healthy plants.",
+      "Improve air circulation around plants."
+    ],
+    "chemical_treatment": [
+      "Use crop-specific disease management products only if advised and follow label instructions."
+    ],
+    "prevention": [
+      "Use disease-free seeds or seedlings.",
+      "Rotate crops where possible.",
+      "Keep the growing area clean.",
+      "Avoid overhead watering."
+    ]
+  },
+  "rust": {
+    "severity": "MODERATE",
+    "description": "Rust disease usually appears as orange, yellow, or brown powder-like spots on leaves.",
+    "organic_treatment": [
+      "Remove infected leaves carefully.",
+      "Improve air circulation around the plant.",
+      "Apply neem oil spray in mild cases.",
+      "Avoid wetting leaves while watering."
+    ],
+    "chemical_treatment": [
+      "Use a suitable crop-safe fungicide only if infection is severe and follow product instructions."
+    ],
+    "prevention": [
+      "Avoid overhead watering.",
+      "Keep proper spacing between plants.",
+      "Do not leave infected plant debris near healthy plants."
+    ]
+  },
+  "powdery_mildew": {
+    "severity": "MODERATE",
+    "description": "Powdery mildew appears as white or gray powder-like patches on leaves.",
+    "organic_treatment": [
+      "Remove heavily infected leaves.",
+      "Spray neem oil or a mild baking soda solution carefully.",
+      "Place the plant where air circulation is better."
+    ],
+    "chemical_treatment": [
+      "Use a recommended crop-safe fungicide if the infection spreads quickly."
+    ],
+    "prevention": [
+      "Avoid overcrowding plants.",
+      "Avoid excessive nitrogen fertilizer.",
+      "Keep leaves dry when possible."
+    ]
+  },
+  "leaf_spot": {
+    "severity": "MODERATE",
+    "description": "Leaf spot disease causes small brown, black, or yellow spots on leaves.",
+    "organic_treatment": [
+      "Remove affected leaves.",
+      "Avoid overhead watering.",
+      "Use neem oil spray for mild symptoms.",
+      "Improve airflow around the plant."
+    ],
+    "chemical_treatment": [
+      "Use copper-based or crop-safe fungicide if the disease spreads."
+    ],
+    "prevention": [
+      "Water near the soil instead of leaves.",
+      "Clean fallen leaves.",
+      "Avoid planting too close together."
+    ]
+  },
+  "leaf_mold": {
+    "severity": "MODERATE",
+    "description": "Leaf mold usually appears in humid conditions and causes yellowing or mold-like growth on leaves.",
+    "organic_treatment": [
+      "Remove infected leaves.",
+      "Improve ventilation and reduce humidity.",
+      "Avoid wetting leaves during watering."
+    ],
+    "chemical_treatment": [
+      "Use a crop-safe fungicide if symptoms continue spreading."
+    ],
+    "prevention": [
+      "Avoid overcrowding plants.",
+      "Keep leaves dry.",
+      "Improve air movement around plants."
+    ]
+  },
+  "early_blight": {
+    "severity": "HIGH",
+    "description": "Early blight causes dark circular spots and yellowing, especially on older leaves.",
+    "organic_treatment": [
+      "Remove infected leaves immediately.",
+      "Use compost to improve plant strength.",
+      "Apply neem oil in early stages.",
+      "Avoid splashing soil onto leaves."
+    ],
+    "chemical_treatment": [
+      "Use a suitable crop-safe fungicide for blight if symptoms are severe."
+    ],
+    "prevention": [
+      "Rotate crops.",
+      "Avoid overhead watering.",
+      "Use disease-free seeds or seedlings.",
+      "Keep soil from splashing onto leaves."
+    ]
+  },
+  "late_blight": {
+    "severity": "HIGH",
+    "description": "Late blight spreads quickly and can damage leaves, stems, and fruits.",
+    "organic_treatment": [
+      "Remove and destroy infected plant parts.",
+      "Keep plants dry and well-spaced.",
+      "Avoid working with plants when leaves are wet."
+    ],
+    "chemical_treatment": [
+      "Use recommended blight fungicide quickly if infection is spreading."
+    ],
+    "prevention": [
+      "Avoid overhead watering.",
+      "Use resistant varieties when possible.",
+      "Monitor plants during cool and wet weather."
+    ]
+  },
+  "bacterial_spot": {
+    "severity": "HIGH",
+    "description": "Bacterial spot causes dark water-soaked spots on leaves and fruits.",
+    "organic_treatment": [
+      "Remove infected leaves.",
+      "Avoid touching healthy plants after handling infected plants.",
+      "Improve spacing and airflow."
+    ],
+    "chemical_treatment": [
+      "Copper-based sprays may help reduce spread, but follow local recommendations."
+    ],
+    "prevention": [
+      "Use clean tools.",
+      "Avoid overhead watering.",
+      "Use disease-free seeds."
+    ]
+  },
+  "yellow_leaf_curl": {
+    "severity": "HIGH",
+    "description": "Yellow leaf curl causes curling, yellowing, and stunted growth, often spread by whiteflies.",
+    "organic_treatment": [
+      "Remove severely infected plants.",
+      "Control whiteflies using yellow sticky traps.",
+      "Use neem oil to reduce whitefly population."
+    ],
+    "chemical_treatment": [
+      "Use recommended insect control only if whitefly infestation is high."
+    ],
+    "prevention": [
+      "Use insect nets where possible.",
+      "Remove weeds near plants.",
+      "Choose resistant varieties."
+    ]
+  },
+  "mosaic_virus": {
+    "severity": "HIGH",
+    "description": "Mosaic virus causes mottled green-yellow leaf patterns and poor growth.",
+    "organic_treatment": [
+      "Remove infected plants to prevent spread.",
+      "Control insects that spread viruses.",
+      "Disinfect tools after use."
+    ],
+    "chemical_treatment": [
+      "There is no direct chemical cure for viral infection."
+    ],
+    "prevention": [
+      "Use healthy seedlings.",
+      "Control aphids and other insect vectors.",
+      "Avoid touching healthy plants after infected plants."
+    ]
+  },
+  "spider_mites": {
+    "severity": "MODERATE",
+    "description": "Spider mites are tiny pests that can cause yellow speckling, webbing, and leaf damage.",
+    "organic_treatment": [
+      "Spray leaves gently with water to reduce mites.",
+      "Use neem oil or insecticidal soap in mild cases.",
+      "Remove heavily affected leaves."
+    ],
+    "chemical_treatment": [
+      "Use a crop-safe miticide only if infestation is severe and follow product instructions."
+    ],
+    "prevention": [
+      "Inspect the underside of leaves regularly.",
+      "Avoid very dry plant conditions.",
+      "Keep plants healthy and well-watered."
+    ]
+  },
+  "leaf_scorch": {
+    "severity": "MODERATE",
+    "description": "Leaf scorch causes browning or burning along leaf edges and may be linked to stress, disease, or poor water balance.",
+    "organic_treatment": [
+      "Remove badly damaged leaves.",
+      "Check watering consistency.",
+      "Protect the plant from extreme heat if needed."
+    ],
+    "chemical_treatment": [
+      "Chemical treatment is usually not needed unless a disease is confirmed."
+    ],
+    "prevention": [
+      "Water deeply and consistently.",
+      "Avoid fertilizer overuse.",
+      "Reduce heat or drought stress where possible."
+    ]
+  },
+  "citrus_greening": {
+    "severity": "HIGH",
+    "description": "Citrus greening is a serious disease that causes yellowing, poor fruit quality, and plant decline.",
+    "organic_treatment": [
+      "Remove severely infected branches if advised.",
+      "Control insect vectors such as psyllids.",
+      "Keep the plant healthy with proper nutrition."
+    ],
+    "chemical_treatment": [
+      "Use expert-recommended insect control for psyllid management if needed."
+    ],
+    "prevention": [
+      "Use disease-free planting material.",
+      "Control insect vectors early.",
+      "Ask local agricultural experts for citrus management guidance."
+    ]
+  },
+  "grape_esca": {
+    "severity": "HIGH",
+    "description": "Grape esca, also called black measles, can cause leaf discoloration, internal wood decay, and fruit symptoms.",
+    "organic_treatment": [
+      "Prune infected wood carefully.",
+      "Remove severely affected vines if needed.",
+      "Improve vineyard sanitation."
+    ],
+    "chemical_treatment": [
+      "There is limited chemical cure; ask local agricultural experts for crop-specific management."
+    ],
+    "prevention": [
+      "Use clean pruning tools.",
+      "Avoid large pruning wounds where possible.",
+      "Remove infected plant debris."
+    ]
+  },
+  "default": {
+    "severity": "MODERATE",
+    "description": "The model detected a possible plant disease. Use the prediction as decision support, not a final expert diagnosis.",
+    "organic_treatment": [
+      "Remove badly affected leaves.",
+      "Avoid overwatering.",
+      "Improve sunlight and air circulation.",
+      "Use neem oil spray for mild fungal symptoms."
+    ],
+    "chemical_treatment": [
+      "Use crop-specific fungicide or pesticide only if symptoms are severe and follow product instructions."
+    ],
+    "prevention": [
+      "Keep the plant area clean.",
+      "Inspect plants regularly.",
+      "Avoid watering leaves directly.",
+      "Separate infected plants from healthy ones."
+    ]
+  }
+}
