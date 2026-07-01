@@ -30,6 +30,7 @@ from app.models.esg_report import ESGReport
 from app.models.esg_report_metric import ESGReportMetric
 from app.models.admin_audit_log import AdminAuditLog
 from app.models.platform_setting import PlatformSetting
+from app.models.password_reset_token import PasswordResetToken
 
 __all__ = [
     "User",
@@ -64,4 +65,5 @@ __all__ = [
     "ESGReportMetric",
     "AdminAuditLog",
     "PlatformSetting",
+    "PasswordResetToken",
 ]

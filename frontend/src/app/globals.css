@@ -591,3 +591,23 @@ input:-webkit-autofill:focus {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================
+   GREENSPRINT THEME SUPPORT
+========================================== */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}

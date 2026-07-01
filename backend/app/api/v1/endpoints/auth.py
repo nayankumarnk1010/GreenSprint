@@ -13,9 +13,11 @@ from app.core.exceptions import (
 from app.core.jwt import create_access_token
 from app.db.dependencies import get_db
 from app.schemas.auth import (
+    ForgotPasswordRequest,
+    MessageResponse,
+    ResetPasswordRequest,
     UserRegister,
     UserResponse,
-    
 )
 from app.schemas.token import TokenResponse
 from app.services.auth_service import (
@@ -67,7 +69,6 @@ def login(
     db: Session = Depends(get_db),
 ):
     try:
-
         user = AuthService.authenticate_user(
             db=db,
             email=form_data.username,
@@ -90,4 +91,51 @@ def login(
             headers={
                 "WWW-Authenticate": "Bearer",
             },
+        )
+
+
+@router.post(
+    "/forgot-password",
+    response_model=MessageResponse,
+)
+def forgot_password(
+    payload: ForgotPasswordRequest,
+    db: Session = Depends(get_db),
+):
+    AuthService.request_password_reset(
+        db=db,
+        email=payload.email,
+    )
+
+    return MessageResponse(
+        message=(
+            "If this email is registered, password reset instructions "
+            "will be sent."
+        )
+    )
+
+
+@router.post(
+    "/reset-password",
+    response_model=MessageResponse,
+)
+def reset_password(
+    payload: ResetPasswordRequest,
+    db: Session = Depends(get_db),
+):
+    try:
+        AuthService.reset_password(
+            db=db,
+            token=payload.token,
+            new_password=payload.new_password,
+        )
+
+        return MessageResponse(
+            message="Password reset successful. You can now login."
+        )
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(exc),
         )

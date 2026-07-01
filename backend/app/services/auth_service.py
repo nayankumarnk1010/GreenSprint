@@ -1,6 +1,12 @@
+import hashlib
+import secrets
+from datetime import datetime
+from datetime import timedelta
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.core.config import settings
 from app.core.enums import UserRole
 from app.core.exceptions import (
     UserAlreadyExistsException,
@@ -8,8 +14,10 @@ from app.core.exceptions import (
 )
 from app.core.security import hash_password
 from app.core.security import verify_password
+from app.models.password_reset_token import PasswordResetToken
 from app.models.user import User
 from app.schemas.auth import UserRegister
+from app.services.email_service import EmailService
 
 
 class AuthService:
@@ -104,3 +112,114 @@ class AuthService:
             )
 
         return user
+
+    @staticmethod
+    def _hash_reset_token(
+        token: str,
+    ) -> str:
+        return hashlib.sha256(
+            token.encode("utf-8")
+        ).hexdigest()
+
+    @staticmethod
+    def request_password_reset(
+        db: Session,
+        email: str,
+    ) -> None:
+        user = AuthService.get_user_by_email(
+            db=db,
+            email=email,
+        )
+
+        # Security rule:
+        # Do not reveal whether the email exists.
+        if not user:
+            return
+
+        now = datetime.utcnow()
+
+        db.query(PasswordResetToken).filter(
+            PasswordResetToken.user_id == user.id,
+            PasswordResetToken.used_at.is_(None),
+        ).update(
+            {
+                PasswordResetToken.used_at: now,
+            },
+            synchronize_session=False,
+        )
+
+        raw_token = secrets.token_urlsafe(48)
+        token_hash = AuthService._hash_reset_token(raw_token)
+
+        reset_token = PasswordResetToken(
+            user_id=user.id,
+            token_hash=token_hash,
+            expires_at=now
+            + timedelta(
+                minutes=settings.PASSWORD_RESET_EXPIRE_MINUTES
+            ),
+        )
+
+        db.add(reset_token)
+        db.commit()
+
+        reset_link = (
+            f"{settings.FRONTEND_URL.rstrip()}"
+            f"/reset-password?token={raw_token}"
+        )
+
+        EmailService.send_password_reset_email(
+            to_email=user.email,
+            full_name=user.full_name,
+            reset_link=reset_link,
+        )
+
+    @staticmethod
+    def reset_password(
+        db: Session,
+        token: str,
+        new_password: str,
+    ) -> None:
+        token_hash = AuthService._hash_reset_token(token)
+
+        reset_token = (
+            db.query(PasswordResetToken)
+            .filter(
+                PasswordResetToken.token_hash == token_hash,
+                PasswordResetToken.used_at.is_(None),
+            )
+            .first()
+        )
+
+        if not reset_token:
+            raise ValueError(
+                "Invalid or expired reset token"
+            )
+
+        now = datetime.utcnow()
+
+        if reset_token.expires_at < now:
+            reset_token.used_at = now
+            db.commit()
+
+            raise ValueError(
+                "Invalid or expired reset token"
+            )
+
+        user = AuthService.get_user_by_id(
+            db=db,
+            user_id=reset_token.user_id,
+        )
+
+        if not user:
+            reset_token.used_at = now
+            db.commit()
+
+            raise ValueError(
+                "Invalid or expired reset token"
+            )
+
+        user.password_hash = hash_password(new_password)
+        reset_token.used_at = now
+
+        db.commit()

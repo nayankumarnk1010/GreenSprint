@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import {
   BadgeCheck,
   BarChart3,
@@ -30,13 +31,18 @@ import RegisterForm, {
 } from "@/components/forms/RegisterForm";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+import ForgotPasswordForm, {
+  type ForgotPasswordVisualState,
+} from "@/components/forms/ForgotPasswordForm";
+
 const PANEL_COUNT = 4;
 
-type AuthMode = "login" | "register";
+type AuthMode = "login" | "register" | "forgot";
 
 type AuthVisualState =
   | LoginVisualState
-  | RegisterVisualState;
+  | RegisterVisualState
+  | ForgotPasswordVisualState;
 
 export default function LoginPage() {
   const rootRef = useRef<HTMLElement | null>(null);
@@ -183,7 +189,7 @@ export default function LoginPage() {
   return (
     <main
       ref={rootRef}
-      className="relative bg-emerald-50 text-slate-950"
+      className="relative bg-emerald-50 text-slate-950 dark:bg-slate-950 dark:text-white"
     >
       <section
         ref={pinRef}
@@ -203,10 +209,14 @@ export default function LoginPage() {
             GreenSprint
           </button>
 
-          <ParallaxProgress
-            activeIndex={activeIndex}
-            onNavigate={goToPanel}
-          />
+          <div className="pointer-events-auto flex items-center gap-2">
+            <ParallaxProgress
+              activeIndex={activeIndex}
+              onNavigate={goToPanel}
+            />
+
+            <ThemeToggle />
+          </div>
         </header>
 
         <div
@@ -481,50 +491,84 @@ function LoginPanel({
   const copy =
     authMode === "login"
       ? getLoginCopy(visualState as LoginVisualState)
-      : getRegisterCopy(visualState as RegisterVisualState);
+      : authMode === "register"
+        ? getRegisterCopy(visualState as RegisterVisualState)
+        : getForgotPasswordCopy(
+            visualState as ForgotPasswordVisualState
+          );
 
   const stateClass =
     visualState === "error"
-      ? "border-red-200 shadow-red-100"
+      ? "border-red-200 shadow-red-100 dark:border-red-400/30 dark:shadow-red-950/30"
       : visualState === "success"
-        ? "border-lime-200 shadow-lime-100"
+        ? "border-lime-200 shadow-lime-100 dark:border-lime-400/30 dark:shadow-lime-950/30"
         : visualState === "loading"
-          ? "border-emerald-300 shadow-emerald-200"
-          : "border-white/90 shadow-emerald-100";
+          ? "border-emerald-300 shadow-emerald-200 dark:border-emerald-400/40 dark:shadow-emerald-950/30"
+          : "border-white/90 shadow-emerald-100 dark:border-white/10 dark:shadow-black/30";
 
   const cardWidth =
     authMode === "login"
       ? "max-w-[430px]"
-      : "max-w-[560px]";
+      : authMode === "register"
+        ? "max-w-[560px]"
+        : "max-w-[430px]";
+
+  const leftLabel =
+    authMode === "login"
+      ? "Start Now"
+      : authMode === "register"
+        ? "Join Now"
+        : "Recover Account";
+
+  const cardLabel =
+    authMode === "login"
+      ? "GreenSprint Login"
+      : authMode === "register"
+        ? "GreenSprint Register"
+        : "Password Recovery";
+
+  const cardTitle =
+    authMode === "login"
+      ? "Welcome back"
+      : authMode === "register"
+        ? "Create account"
+        : "Reset password";
+
+  const cardDescription =
+    authMode === "login"
+      ? "Continue to missions, AI verification, rewards, community, and impact reports."
+      : authMode === "register"
+        ? "Join GreenSprint to complete verified eco missions and earn rewards."
+        : "Enter your registered email to continue password recovery.";
 
   return (
     <section className="flex h-dvh w-screen shrink-0 snap-center items-center justify-center px-5 pb-6 pt-28 sm:px-8 lg:px-12">
       <div
         className={`mx-auto grid w-full items-center gap-8 ${
-          authMode === "login"
-            ? "max-w-6xl lg:grid-cols-[0.95fr_0.9fr]"
-            : "max-w-6xl lg:grid-cols-[0.9fr_1fr]"
+          authMode === "register"
+            ? "max-w-6xl lg:grid-cols-[0.9fr_1fr]"
+            : "max-w-6xl lg:grid-cols-[0.95fr_0.9fr]"
         }`}
       >
-        <div className="hidden rounded-[1.9rem] border border-white/80 bg-white/62 p-7 shadow-[0_24px_70px_rgba(15,118,110,0.12)] backdrop-blur-2xl lg:block">
-          <p className="text-xs font-black uppercase tracking-[0.26em] text-emerald-700">
-            {authMode === "login" ? "Start Now" : "Join Now"}
+        <div className="hidden rounded-[1.9rem] border border-white/80 bg-white/62 p-7 shadow-[0_24px_70px_rgba(15,118,110,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/68 dark:shadow-black/30 lg:block">
+          <p className="text-xs font-black uppercase tracking-[0.26em] text-emerald-700 dark:text-emerald-300">
+            {leftLabel}
           </p>
 
-          <h2 className="mt-4 max-w-xl text-4xl font-black leading-[0.94] tracking-[-0.055em] text-slate-950 xl:text-5xl">
+          <h2 className="mt-4 max-w-xl text-4xl font-black leading-[0.94] tracking-[-0.055em] text-slate-950 dark:text-white xl:text-5xl">
             {copy.title}
           </h2>
 
-          <p className="mt-4 max-w-md text-sm font-semibold leading-7 text-slate-600 xl:text-base">
+          <p className="mt-4 max-w-md text-sm font-semibold leading-7 text-slate-600 dark:text-slate-300 xl:text-base">
             {copy.subtitle}
           </p>
         </div>
 
         <div
-          className={`relative mx-auto w-full ${cardWidth} overflow-hidden rounded-[2rem] border bg-white/88 p-5 shadow-[0_28px_80px_rgba(15,118,110,0.18)] backdrop-blur-2xl transition-all duration-300 sm:p-6 ${stateClass}`}
+          className={`relative mx-auto w-full ${cardWidth} overflow-hidden rounded-[2rem] border bg-white/88 p-5 shadow-[0_28px_80px_rgba(15,118,110,0.18)] backdrop-blur-2xl transition-all duration-300 dark:bg-slate-950/75 sm:p-6 ${stateClass}`}
         >
-          <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-emerald-200/50 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 left-8 h-44 w-44 rounded-full bg-lime-200/35 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-emerald-200/50 blur-3xl dark:bg-emerald-500/15" />
+          <div className="pointer-events-none absolute -bottom-24 left-8 h-44 w-44 rounded-full bg-lime-200/35 blur-3xl dark:bg-lime-400/10" />
 
           <div className="relative">
             <div
@@ -543,40 +587,34 @@ function LoginPanel({
                   <Sparkles className="h-5 w-5" />
                 </div>
 
-                <p className="text-[0.65rem] font-black uppercase tracking-[0.24em] text-emerald-700">
-                  {authMode === "login"
-                    ? "GreenSprint Login"
-                    : "GreenSprint Register"}
+                <p className="text-[0.65rem] font-black uppercase tracking-[0.24em] text-emerald-700 dark:text-emerald-300">
+                  {cardLabel}
                 </p>
 
                 <h3
-                  className={`mt-2 font-black leading-none tracking-[-0.045em] text-slate-950 ${
+                  className={`mt-2 font-black leading-none tracking-[-0.045em] text-slate-950 dark:text-white ${
                     authMode === "login"
                       ? "text-[1.7rem]"
                       : "text-[1.55rem]"
                   }`}
                 >
-                  {authMode === "login"
-                    ? "Welcome back"
-                    : "Create account"}
+                  {cardTitle}
                 </h3>
               </div>
 
-              <span className="mt-1 rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[0.65rem] font-black uppercase tracking-[0.16em] text-emerald-700">
+              <span className="mt-1 rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[0.65rem] font-black uppercase tracking-[0.16em] text-emerald-700 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-200">
                 Secure
               </span>
             </div>
 
             <p
-              className={`text-sm font-semibold leading-6 text-slate-500 ${
+              className={`text-sm font-semibold leading-6 text-slate-500 dark:text-slate-300 ${
                 authMode === "login"
                   ? "-mt-2 mb-5"
                   : "mb-4"
               }`}
             >
-              {authMode === "login"
-                ? "Continue to missions, AI verification, rewards, community, and impact reports."
-                : "Join GreenSprint to complete verified eco missions and earn rewards."}
+              {cardDescription}
             </p>
 
             {authMode === "login" ? (
@@ -587,9 +625,21 @@ function LoginPanel({
                 onSwitchToRegister={() =>
                   onAuthModeChange("register")
                 }
+                onSwitchToForgot={() =>
+                  onAuthModeChange("forgot")
+                }
+              />
+            ) : authMode === "register" ? (
+              <RegisterForm
+                onVisualStateChange={(state) =>
+                  onVisualStateChange(state)
+                }
+                onSwitchToLogin={() =>
+                  onAuthModeChange("login")
+                }
               />
             ) : (
-              <RegisterForm
+              <ForgotPasswordForm
                 onVisualStateChange={(state) =>
                   onVisualStateChange(state)
                 }
@@ -714,5 +764,47 @@ function getRegisterCopy(state: RegisterVisualState) {
     title: "Start your GreenSprint journey.",
     subtitle:
       "Create an account to begin completing verified eco missions and tracking real impact.",
+  };
+}
+
+function getForgotPasswordCopy(
+  state: ForgotPasswordVisualState
+) {
+  if (state === "email") {
+    return {
+      title: "Find your account.",
+      subtitle:
+        "Enter the email address linked with your GreenSprint account.",
+    };
+  }
+
+  if (state === "loading") {
+    return {
+      title: "Checking account.",
+      subtitle:
+        "GreenSprint is checking the account recovery request.",
+    };
+  }
+
+  if (state === "success") {
+    return {
+      title: "Check your email.",
+      subtitle:
+        "If this account exists, reset instructions will be sent to the registered email.",
+    };
+  }
+
+  if (state === "error") {
+    return {
+      title: "Try again.",
+      subtitle:
+        "Enter a valid email address to continue password recovery.",
+    };
+  }
+
+  return {
+    title: "Recover your account.",
+    subtitle:
+      "Use password recovery to get back into your GreenSprint account.",
   };
 }

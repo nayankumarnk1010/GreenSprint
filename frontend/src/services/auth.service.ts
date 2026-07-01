@@ -5,6 +5,9 @@ import type {
   RegisterRequest,
   LoginRequest,
   TokenResponse,
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  MessageResponse,
 } from "@/types/auth";
 
 const TOKEN_KEY = "greensprint_access_token";
@@ -40,15 +43,8 @@ export class AuthService {
   ): Promise<TokenResponse> {
     const formData = new URLSearchParams();
 
-    formData.append(
-      "username",
-      payload.email
-    );
-
-    formData.append(
-      "password",
-      payload.password
-    );
+    formData.append("username", payload.email);
+    formData.append("password", payload.password);
 
     const response = await fetch(
       `${API_BASE_URL}/auth/login`,
@@ -65,9 +61,7 @@ export class AuthService {
     if (!response.ok) {
       const error = await response.json();
 
-      throw new Error(
-        error.detail || "Login failed"
-      );
+      throw new Error(error.detail || "Login failed");
     }
 
     const tokenData: TokenResponse =
@@ -81,23 +75,70 @@ export class AuthService {
     return tokenData;
   }
 
+  static async forgotPassword(
+    payload: ForgotPasswordRequest
+  ): Promise<MessageResponse> {
+    const response = await fetch(
+      `${API_BASE_URL}/auth/forgot-password`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+
+      throw new Error(
+        error.detail ||
+          "Unable to process password reset request"
+      );
+    }
+
+    return response.json();
+  }
+
+  static async resetPassword(
+    payload: ResetPasswordRequest
+  ): Promise<MessageResponse> {
+    const response = await fetch(
+      `${API_BASE_URL}/auth/reset-password`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+
+      throw new Error(
+        error.detail || "Password reset failed"
+      );
+    }
+
+    return response.json();
+  }
+
   static logout(): void {
     localStorage.removeItem(TOKEN_KEY);
   }
 
   static getToken(): string | null {
-    return localStorage.getItem(
-      TOKEN_KEY
-    );
+    return localStorage.getItem(TOKEN_KEY);
   }
 
   static async getCurrentUser(): Promise<User> {
     const token = this.getToken();
 
     if (!token) {
-      throw new Error(
-        "User not authenticated"
-      );
+      throw new Error("User not authenticated");
     }
 
     const response = await fetch(
@@ -110,9 +151,7 @@ export class AuthService {
     );
 
     if (!response.ok) {
-      throw new Error(
-        "Failed to load user"
-      );
+      throw new Error("Failed to load user");
     }
 
     return response.json();

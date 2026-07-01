@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
 import { AuthService } from "@/services/auth.service";
@@ -28,7 +28,7 @@ export default function RegisterForm({
   onVisualStateChange,
   onSwitchToLogin,
 }: RegisterFormProps) {
-  const [formKey] = useState(() => Date.now().toString());
+  const formId = useId().replace(/:/g, "");
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -129,7 +129,7 @@ export default function RegisterForm({
 
   return (
     <form
-      key={formKey}
+      key={formId}
       onSubmit={handleSubmit}
       autoComplete="off"
       className="space-y-3"
@@ -151,7 +151,7 @@ export default function RegisterForm({
 
           <input
             id="greensprint-register-name"
-            name={`greensprint-register-name-${formKey}`}
+            name={`greensprint-register-name-${formId}`}
             type="text"
             required
             autoComplete="off"
@@ -178,7 +178,7 @@ export default function RegisterForm({
 
           <input
             id="greensprint-register-email"
-            name={`greensprint-register-email-${formKey}`}
+            name={`greensprint-register-email-${formId}`}
             type="email"
             required
             autoComplete="off"
@@ -240,7 +240,7 @@ export default function RegisterForm({
           <div className="relative">
             <input
               id="greensprint-register-password"
-              name={`greensprint-register-password-${formKey}`}
+              name={`greensprint-register-password-${formId}`}
               type={showPassword ? "text" : "password"}
               required
               autoComplete="new-password"
@@ -292,7 +292,7 @@ export default function RegisterForm({
           <div className="relative">
             <input
               id="greensprint-register-confirm-password"
-              name={`greensprint-register-confirm-password-${formKey}`}
+              name={`greensprint-register-confirm-password-${formId}`}
               type={showConfirmPassword ? "text" : "password"}
               required
               autoComplete="new-password"
