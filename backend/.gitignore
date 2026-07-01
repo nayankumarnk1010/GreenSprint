@@ -1,0 +1,6 @@
+
+# Local private files
+.env
+*.db
+__pycache__/
+*.pyc
